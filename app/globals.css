@@ -49,6 +49,158 @@ body {
   pointer-events: none;
 }
 
+/* ── Name animations ──────────────────────────────────── */
+
+@keyframes nameWordIn {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.name-word-hero {
+  opacity: 0;
+  animation: nameWordIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes nameWordMenu {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.name-word {
+  opacity: 0;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 800;
+  color: #f43f5e;
+  animation: nameWordMenu 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Menu animations ──────────────────────────────────── */
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.menu-fade-in {
+  opacity: 0;
+  animation: menuFadeIn 0.5s ease forwards;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.menu-card-enter {
+  opacity: 0;
+  animation: cardEnter 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Note card animations ─────────────────────────────── */
+
+@keyframes noteEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.note-card-enter {
+  opacity: 0;
+  animation: noteEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Welcome screen animations ───────────────────────── */
+
+@keyframes birthdayPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-5deg);
+  }
+  70% {
+    transform: scale(1.1) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+.birthday-pop {
+  opacity: 0;
+  animation: birthdayPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes btnPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(236, 72, 153, 0);
+  }
+}
+.btn-pulse {
+  animation: btnPulse 2s ease-in-out infinite;
+}
+
+/* ── Flip cards ───────────────────────────────────────── */
+
+.flip-card {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
 /* ── Flip-card 3D ─────────────────────────────────────── */
 
 .flip-card {
