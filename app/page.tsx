@@ -241,7 +241,7 @@ function MenuScreen({ setScreen }: { setScreen: (s: Screen) => void }) {
             className={cn(
               "flex flex-col items-center gap-3 p-8 rounded-2xl border-2 shadow hover:scale-105 transition-transform cursor-pointer",
               card.bg,
-              card.border
+              card.border,
             )}
           >
             <span className="text-5xl">{card.icon}</span>
@@ -376,7 +376,9 @@ function GalleryScreen({ onBack }: { onBack: () => void }) {
             onClick={() => setIndex(i)}
             className={cn(
               "w-2 h-2 rounded-full transition-all",
-              i === index ? "bg-pink-400 scale-125" : "bg-zinc-600 hover:bg-zinc-400"
+              i === index
+                ? "bg-pink-400 scale-125"
+                : "bg-zinc-600 hover:bg-zinc-400",
             )}
           />
         ))}
@@ -430,21 +432,21 @@ function NotesScreen({ onBack }: { onBack: () => void }) {
               <div
                 className={cn(
                   "flip-card-front rounded-2xl overflow-hidden shadow-lg border-2 border-white/60",
-                  card.bg
+                  card.bg,
                 )}
               >
                 {/* Horizontal ribbon */}
                 <div
                   className={cn(
                     "absolute top-1/2 left-0 right-0 h-5 -translate-y-1/2 opacity-60",
-                    card.ribbon
+                    card.ribbon,
                   )}
                 />
                 {/* Vertical ribbon */}
                 <div
                   className={cn(
                     "absolute left-1/2 top-0 bottom-0 w-5 -translate-x-1/2 opacity-60",
-                    card.ribbon
+                    card.ribbon,
                   )}
                 />
                 {/* Content over ribbons */}
@@ -464,7 +466,7 @@ function NotesScreen({ onBack }: { onBack: () => void }) {
               <div
                 className={cn(
                   "flip-card-back rounded-2xl flex flex-col items-center justify-center p-5 shadow-lg border-2 border-white/60",
-                  card.bg
+                  card.bg,
                 )}
               >
                 <p
@@ -508,7 +510,7 @@ export default function Home() {
           key={pos}
           className={cn(
             "absolute text-3xl sm:text-4xl animate-bounce select-none",
-            pos
+            pos,
           )}
           style={{ animationDelay: delay }}
           aria-hidden="true"
@@ -542,4 +544,3 @@ export default function Home() {
     </div>
   );
 }
-
