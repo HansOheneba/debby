@@ -113,26 +113,15 @@ export function NotesScreen({ onBack }: { onBack: () => void }) {
                     backgroundSize: "100% 32px",
                   }}
                 >
-                  <div className="pt-[6px]">
-                    <p
-                      className="text-xs font-bold uppercase tracking-widest mb-2"
-                      style={{
-                        fontFamily: "var(--font-heading)",
-                        color: card.lineColor,
-                        lineHeight: "32px",
-                      }}
-                    >
-                      From: {card.from}
-                    </p>
-
+                  <div className="pt-1.5">
                     <p
                       className="text-sm text-zinc-700 whitespace-pre-line"
                       style={{
-                        fontFamily: "cursive, var(--font-body)",
+                        fontFamily: " var(--font-body)",
                         lineHeight: "32px",
                         letterSpacing: "0.3px",
                         margin: 0,
-                        transform: "translateY(-10px)", // 👈 KEY FIX
+                        transform: "translateY(-2px)", // 👈 KEY FIX
                       }}
                     >
                       {card.message}
