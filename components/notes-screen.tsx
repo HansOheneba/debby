@@ -34,109 +34,108 @@ export function NotesScreen({ onBack }: { onBack: () => void }) {
         {NOTE_CARDS.map((card, i) => (
           <div
             key={card.id}
-            className="flip-card w-full max-w-lg cursor-pointer select-none note-card-enter"
-            style={{ height: "520px", animationDelay: `${i * 0.15}s` }}
+            className="w-full max-w-lg cursor-pointer select-none note-card-enter"
+            style={{
+              perspective: "1000px",
+              animationDelay: `${i * 0.15}s`,
+            }}
             onClick={() => toggle(card.id)}
           >
+            {/* Front */}
             <div
-              className="flip-card-inner"
-              style={{
-                transform: flipped.has(card.id)
-                  ? "rotateY(180deg)"
-                  : "rotateY(0deg)",
-              }}
+              className={cn(
+                "rounded-2xl overflow-hidden shadow-lg border-2 border-white/60 relative transition-all duration-500",
+                card.bg,
+                flipped.has(card.id) ? "hidden" : "block",
+              )}
+              style={{ minHeight: "220px" }}
             >
-              {/* Front — gift-wrap */}
               <div
                 className={cn(
-                  "flip-card-front rounded-2xl overflow-hidden shadow-lg border-2 border-white/60",
-                  card.bg,
+                  "absolute top-1/2 left-0 right-0 h-6 -translate-y-1/2 opacity-60",
+                  card.ribbon,
                 )}
+              />
+              <div
+                className={cn(
+                  "absolute left-1/2 top-0 bottom-0 w-6 -translate-x-1/2 opacity-60",
+                  card.ribbon,
+                )}
+              />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full gap-4 p-6 py-10">
+                <span className="text-6xl">🎀</span>
+                <p
+                  className="text-lg font-bold text-center text-zinc-700"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {card.frontText}
+                </p>
+                <p className="text-sm text-zinc-500">tap to open</p>
+              </div>
+            </div>
+
+            {/* Back */}
+            <div
+              className={cn(
+                "rounded-2xl overflow-hidden shadow-xl flex transition-all duration-500",
+                flipped.has(card.id) ? "block" : "hidden",
+              )}
+              style={{ backgroundColor: card.paperBg, minHeight: "220px" }}
+            >
+              {/* Margin strip */}
+              <div
+                className="w-10 shrink-0 flex flex-col items-center gap-24 pt-14"
+                style={{ backgroundColor: card.marginBg }}
               >
-                <div
-                  className={cn(
-                    "absolute top-1/2 left-0 right-0 h-6 -translate-y-1/2 opacity-60",
-                    card.ribbon,
-                  )}
-                />
-                <div
-                  className={cn(
-                    "absolute left-1/2 top-0 bottom-0 w-6 -translate-x-1/2 opacity-60",
-                    card.ribbon,
-                  )}
-                />
-                <div className="relative z-10 flex flex-col items-center justify-center h-full gap-4 p-6">
-                  <span className="text-6xl">🎀</span>
-                  <p
-                    className="text-lg font-bold text-center text-zinc-700"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {card.frontText}
-                  </p>
-                  <p className="text-sm text-zinc-500">tap to open</p>
-                </div>
+                {[0, 1, 2].map((dot) => (
+                  <div
+                    key={dot}
+                    className="w-4 h-4 rounded-full border-2"
+                    style={{
+                      backgroundColor: card.paperBg,
+                      borderColor: card.lineColor,
+                    }}
+                  />
+                ))}
               </div>
 
-              {/* Back — lined paper note */}
+              {/* Paper content */}
               <div
-                className="flip-card-back rounded-2xl overflow-hidden shadow-xl flex"
-                style={{ backgroundColor: card.paperBg }}
+                className="flex-1 px-4 pb-6"
+                style={{
+                  backgroundImage: `repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 30px,
+                    ${card.lineColor}55 30px,
+                    ${card.lineColor}55 32px
+                  )`,
+                  backgroundSize: "100% 32px",
+                }}
               >
-                {/* Margin strip */}
-                <div
-                  className="w-10 shrink-0 flex flex-col items-center gap-24 pt-14"
-                  style={{ backgroundColor: card.marginBg }}
-                >
-                  {[0, 1, 2].map((dot) => (
-                    <div
-                      key={dot}
-                      className="w-4 h-4 rounded-full border-2"
-                      style={{
-                        backgroundColor: card.paperBg,
-                        borderColor: card.lineColor,
-                      }}
-                    />
-                  ))}
-                </div>
+                <div className="pt-1.5">
+                  <p
+                    className="text-sm text-zinc-700 whitespace-pre-line"
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      lineHeight: "32px",
+                      letterSpacing: "0.3px",
+                      margin: 0,
+                      transform: "translateY(-2px)",
+                    }}
+                  >
+                    {card.message}
+                  </p>
 
-                {/* Paper content (FIXED ALIGNMENT) */}
-                <div
-                  className="flex-1 overflow-y-auto px-4 pb-6"
-                  style={{
-                    backgroundImage: `repeating-linear-gradient(
-                      to bottom,
-                      transparent 0px,
-                      transparent 30px,
-                      ${card.lineColor}55 30px,
-                      ${card.lineColor}55 32px
-                    )`,
-                    backgroundSize: "100% 32px",
-                  }}
-                >
-                  <div className="pt-1.5">
-                    <p
-                      className="text-sm text-zinc-700 whitespace-pre-line"
-                      style={{
-                        fontFamily: " var(--font-body)",
-                        lineHeight: "32px",
-                        letterSpacing: "0.3px",
-                        margin: 0,
-                        transform: "translateY(-2px)", // 👈 KEY FIX
-                      }}
-                    >
-                      {card.message}
-                    </p>
-
-                    <p
-                      className="mt-2 text-xs text-zinc-400"
-                      style={{
-                        fontFamily: "var(--font-body)",
-                        lineHeight: "32px",
-                      }}
-                    >
-                      tap to close
-                    </p>
-                  </div>
+                  <p
+                    className="mt-2 text-xs text-zinc-400"
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      lineHeight: "32px",
+                    }}
+                  >
+                    tap to close
+                  </p>
                 </div>
               </div>
             </div>
